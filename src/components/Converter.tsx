@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
+import { WalletModal } from "./WalletModal";
 
 const Converter = () => {
     const CHANGE_RATE = 3
@@ -24,6 +25,8 @@ const Converter = () => {
         setBusd((value))
     }
 
+    const [modalShow, setModalShow] = useState<boolean>(false);
+
     return (
         <Card style={{ width: "480px" }} className="p-4">
             <Card.Body>
@@ -40,10 +43,14 @@ const Converter = () => {
                             <Form.Control type="text" placeholder="0.00" onChange={onBusdChangeHandle} value={busd}/>
                         </Form.Group>
                     </Form>
-                <Button variant="primary" className="text-center">
+                <Button variant="primary" className="text-center" onClick={() => setModalShow(true)}>
                     Connect
                 </Button>
             </Card.Body>
+            <WalletModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
         </Card>
     );
 };
